@@ -12,11 +12,6 @@ body {
   color: red;
 }
 
-.display_area {
-  width: 50vw;
-  height: 50vw;
-}
-
 .socials {
   display: flex;
   justify-content: center;
