@@ -4,6 +4,18 @@ document.getElementById("resolution").innerHTML =
   "x" +
   (window.screen.height * window.devicePixelRatio).toFixed(2);
 
+let container = document.getElementById("flagContainer");
+canvas = document.createElement("canvas");
+container.appendChild(canvas);
+canvas.setAttribute("id", "canvas");
+if (window.screen.width > 500) {
+  canvas.setAttribute("height", "500");
+  canvas.setAttribute("width", "500");
+} else {
+  canvas.setAttribute("height", "300");
+  canvas.setAttribute("width", "300");
+}
+
 var canvas = document.querySelector("canvas");
 var gl = canvas.getContext("webgl");
 if (!gl) {
