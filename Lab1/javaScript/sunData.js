@@ -17,7 +17,7 @@ createSunVertexList(0.75, 1.25, 1.25);
 var sunSpikeData = [];
 function createSunSpikeList(radius, xo, yo) {
   midWidth = radius / 8;
-  for (i = -15; i < 375; i += 30) {
+  for (i = -15; i < 345; i += 30) {
     x = radius * Math.cos((Math.PI / 180) * i) + xo;
     y = radius * Math.sin((Math.PI / 180) * i) + yo;
     sunSpikeData.push(...[x, y, 0]);
