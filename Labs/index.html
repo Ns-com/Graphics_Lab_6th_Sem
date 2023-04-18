@@ -8,17 +8,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="language" content="English" />
     <meta name="author" content="Chandan Kumar Mahato" />
-    <title>Nepal Flag WebGL</title>
-    <link rel="stylesheet" href="./styleSheet/flag.css">
+    <title>WebGL</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
-    <div class="Container" id="flagContainer">
-        <h1>Nepal Flag WebGL!</h1>
-        <p id="resolution"></p>
-
+    <div class="header" id="header">
+        <h1 class="title" id="title"></h1>
+        <select onchange="onChangeLab(this.value)">
+            <option>Select</option>
+            <option value="DDA">DDA</option>
+            <option value="BLA">BLA</option>
+            <option value="Nepal">Nepal</option>
+        </select>
     </div>
-    </div>
+    <canvas class="canvas" id="canvas" height="450" width="450" style="background: black">
+    </canvas>
+    <p class="resolution" id="resolution"></p>
     <div class="footer" id="footerId">
         <h3>Graphics Lab Work</h3>
         <h3>Name: Chandan Kumar Mahato (31)</h3>
@@ -39,11 +45,7 @@
                 </svg>
             </a>
         </div>
-    </div>
-    <script src="./javaScript/sunData.js"></script>
-    <script src="./javaScript/moonData.js"></script>
-    <script src="./javaScript/data.js"></script>
-    <script src="./javaScript/flag.js"></script>
+        <script src="./index.js"></script>
 </body>
 
 </html>

@@ -4,11 +4,23 @@ body {
   text-align: center;
 }
 
-.Container h1 {
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+select {
+  min-width: 100px;
+  height: 30px;
+}
+
+.title {
   color: blue;
 }
 
-.Container p {
+.resolution {
   color: red;
 }
 
@@ -17,6 +29,7 @@ body {
   justify-content: center;
   gap: 16px;
 }
+
 .social-icon {
   border-radius: 50%;
   display: grid;
@@ -37,7 +50,6 @@ body {
 .footer {
   position: fixed;
   width: 100%;
-  padding-bottom: 20px;
   background-color: rgb(254, 213, 213);
   text-align: center;
   bottom: 0;
