@@ -1,5 +1,4 @@
 function DrawObject(object, objectSize, fragCode, vertices, start, end) {
-  console.log("hello");
   var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
   gl.shaderSource(fragShader, fragCode);
   gl.compileShader(fragShader);

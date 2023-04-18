@@ -1,4 +1,3 @@
-//processing data
 function drawDDALine() {
   let vertexData = [];
   let X0 = 200;
