@@ -2,8 +2,11 @@ let scriptList = [
   "./glSetup/main.js",
   "./glSetup/glinit.js",
   "./glSetup/draw.js",
-  "./Lab2/algo.js",
-  "./Lab1/algo.js",
+  "./Lab2/DDA.js",
+  "./Lab2/BLA.js",
+  "./Lab1/flag.js",
+  "./Lab3/ellipse.js",
+  "./Lab3/circle.js",
   "./title.js",
 ];
 scriptList.forEach(function (s) {
@@ -15,11 +18,28 @@ scriptList.forEach(function (s) {
 
 function callAlgo(title) {
   if (title === "DDA") {
+    GLINIT();
     drawDDALine();
     return;
   }
+  if (title === "BLA") {
+    GLINIT();
+    drawBLALine();
+    return;
+  }
   if (title === "Nepal") {
+    GLINIT();
     drawFlag();
+    return;
+  }
+  if (title === "Ellipse") {
+    GLINIT();
+    drawEllipseMidPoint();
+    return;
+  }
+  if (title === "Circle") {
+    GLINIT();
+    drawCircleMidPoint();
     return;
   }
 }

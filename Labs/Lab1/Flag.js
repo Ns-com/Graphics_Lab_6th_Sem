@@ -132,3 +132,5 @@ function drawFlag() {
     230
   );
 }
+GLINIT();
+drawFlag();
