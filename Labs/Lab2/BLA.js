@@ -1,9 +1,5 @@
-function drawBLALine() {
+function drawBLALine(X0, Y0, X1, Y1) {
   let vertexData = [];
-  let X0 = 200;
-  let Y0 = 200;
-  let X1 = 400;
-  let Y1 = 400;
 
   let dx = Math.abs(X1 - X0);
   let dy = Math.abs(Y1 - Y0);
@@ -55,6 +51,5 @@ function drawBLALine() {
       vertexData.push(normalise(Y, canvasHeight));
     }
   }
-  let fragCode = `void main() {gl_FragColor = vec4(1, 0, 0, 1);}`; //red color
-  DrawObject(gl.POINTS, 1, fragCode, vertexData, 0, vertexData.length);
+  DrawObject(gl.POINTS, 1, Red, vertexData, 0, vertexData.length);
 }

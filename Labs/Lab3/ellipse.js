@@ -1,9 +1,5 @@
-function drawEllipseMidPoint() {
+function drawEllipseMidPoint(a, b, xc, yc) {
   let vertexData = [];
-  let a = 200;
-  let b = 100;
-  let xc = 220;
-  let yc = 200;
 
   let x = 0;
   let y = b;
@@ -67,6 +63,5 @@ function drawEllipseMidPoint() {
     }
   }
 
-  let fragCode = `void main() {gl_FragColor = vec4(1, 0, 0, 1);}`; //red color
-  DrawObject(gl.POINTS, 1, fragCode, vertexData, 0, vertexData.length);
+  DrawObject(gl.POINTS, 1, Red, vertexData, 0, vertexData.length);
 }

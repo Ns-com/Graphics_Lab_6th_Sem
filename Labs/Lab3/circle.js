@@ -1,37 +1,33 @@
-function drawCircleMidPoint() {
+function drawCircleMidPoint(radius, XC, YC) {
   let vertexData = [];
-  let radius = 100;
-  let xc = 300;
-  let yc = 300;
-
   let x = 0;
   let y = radius;
   let p = 1 - radius;
 
   while (x <= y) {
-    vertexData.push(normalise(xc + x, canvasWidth));
-    vertexData.push(normalise(yc + y, canvasHeight));
+    vertexData.push(normalise(XC + x, canvasWidth));
+    vertexData.push(normalise(YC + y, canvasHeight));
     vertexData.push(0);
-    vertexData.push(normalise(xc + y, canvasWidth));
-    vertexData.push(normalise(yc + x, canvasHeight));
+    vertexData.push(normalise(XC + y, canvasWidth));
+    vertexData.push(normalise(YC + x, canvasHeight));
     vertexData.push(0);
-    vertexData.push(normalise(xc - x, canvasWidth));
-    vertexData.push(normalise(yc + y, canvasHeight));
+    vertexData.push(normalise(XC - x, canvasWidth));
+    vertexData.push(normalise(YC + y, canvasHeight));
     vertexData.push(0);
-    vertexData.push(normalise(xc - y, canvasWidth));
-    vertexData.push(normalise(yc + x, canvasHeight));
+    vertexData.push(normalise(XC - y, canvasWidth));
+    vertexData.push(normalise(YC + x, canvasHeight));
     vertexData.push(0);
-    vertexData.push(normalise(xc + x, canvasWidth));
-    vertexData.push(normalise(yc - y, canvasHeight));
+    vertexData.push(normalise(XC + x, canvasWidth));
+    vertexData.push(normalise(YC - y, canvasHeight));
     vertexData.push(0);
-    vertexData.push(normalise(xc + y, canvasWidth));
-    vertexData.push(normalise(yc - x, canvasHeight));
+    vertexData.push(normalise(XC + y, canvasWidth));
+    vertexData.push(normalise(YC - x, canvasHeight));
     vertexData.push(0);
-    vertexData.push(normalise(xc - x, canvasWidth));
-    vertexData.push(normalise(yc - y, canvasHeight));
+    vertexData.push(normalise(XC - x, canvasWidth));
+    vertexData.push(normalise(YC - y, canvasHeight));
     vertexData.push(0);
-    vertexData.push(normalise(xc - y, canvasWidth));
-    vertexData.push(normalise(yc - x, canvasHeight));
+    vertexData.push(normalise(XC - y, canvasWidth));
+    vertexData.push(normalise(YC - x, canvasHeight));
     vertexData.push(0);
 
     if (p < 0) {
@@ -44,6 +40,5 @@ function drawCircleMidPoint() {
     }
   }
 
-  let fragCode = `void main() {gl_FragColor = vec4(1, 0, 0, 1);}`; //red color
-  DrawObject(gl.POINTS, 1, fragCode, vertexData, 0, vertexData.length);
+  DrawObject(gl.POINTS, 1, Red, vertexData, 0, vertexData.length);
 }

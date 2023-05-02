@@ -7,6 +7,14 @@ let scriptList = [
   "./Lab1/flag.js",
   "./Lab3/ellipse.js",
   "./Lab3/circle.js",
+  "./Lab4/axis.js",
+  "./Lab4/triangle.js",
+  "./Lab4/matrix.js",
+  "./Lab4/reflection.js",
+  "./Lab4/rotate.js",
+  "./Lab4/scaling.js",
+  "./Lab4/shearing.js",
+  "./Lab4/translation.js",
   "./title.js",
 ];
 scriptList.forEach(function (s) {
@@ -17,14 +25,15 @@ scriptList.forEach(function (s) {
 });
 
 function callAlgo(title) {
+  document.getElementById("transform-control").style.display = "none";
   if (title === "DDA") {
     GLINIT();
-    drawDDALine();
+    drawDDALine(100, 100, 300, 300);
     return;
   }
   if (title === "BLA") {
     GLINIT();
-    drawBLALine();
+    drawBLALine(100, 100, 300, 300);
     return;
   }
   if (title === "Nepal") {
@@ -34,12 +43,45 @@ function callAlgo(title) {
   }
   if (title === "Ellipse") {
     GLINIT();
-    drawEllipseMidPoint();
+    drawEllipseMidPoint(80, 50, 120, 200);
     return;
   }
   if (title === "Circle") {
     GLINIT();
-    drawCircleMidPoint();
+    drawCircleMidPoint(80, 120, 200);
+    return;
+  }
+  if (title === "Transformation") {
+    GLINIT();
+    document.getElementById("transform-control").style.display = "block";
+    drawAxis();
+    drawTriangle();
+    return;
+  }
+}
+
+function callTransformer(transform) {
+  GLINIT();
+  drawAxis();
+  drawTriangle();
+  if (transform === "Rotation") {
+    rotateObject();
+    return;
+  }
+  if (transform === "Scaling") {
+    scaleObject();
+    return;
+  }
+  if (transform === "Shearing") {
+    shearObject();
+    return;
+  }
+  if (transform === "Reflection") {
+    reflectObject();
+    return;
+  }
+  if (transform === "Translation") {
+    translateObject();
     return;
   }
 }

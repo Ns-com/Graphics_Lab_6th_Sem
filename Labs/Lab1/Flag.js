@@ -107,30 +107,9 @@ function drawFlag() {
     vertexData.push(y);
   }
 
-  DrawObject(
-    gl.TRIANGLES,
-    3,
-    `void main() {gl_FragColor = vec4(0, 0, 1, 1);}`,
-    vertexData,
-    6,
-    9
-  );
-  DrawObject(
-    gl.TRIANGLES,
-    3,
-    `void main() {gl_FragColor = vec4(1, 0, 0, 1);}`,
-    vertexData,
-    0,
-    3
-  );
-  DrawObject(
-    gl.TRIANGLES,
-    3,
-    `void main() {gl_FragColor = vec4(1, 1, 1, 1);}`,
-    vertexData,
-    12,
-    230
-  );
+  DrawObject(gl.TRIANGLES, 3, Blue, vertexData, 6, 9);
+  DrawObject(gl.TRIANGLES, 3, Red, vertexData, 0, 3);
+  DrawObject(gl.TRIANGLES, 3, White, vertexData, 12, 230);
 }
 GLINIT();
 drawFlag();

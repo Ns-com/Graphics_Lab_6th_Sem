@@ -2,6 +2,10 @@ var gl;
 var vertexBuffer;
 var vertCode;
 var vertShader;
+var Red = `void main() {gl_FragColor = vec4(1, 0, 0, 1);}`;
+var Green = `void main() {gl_FragColor = vec4(0, 1, 0, 1);}`;
+var Blue = `void main() {gl_FragColor = vec4(0, 0, 1, 1);}`;
+var White = `void main() {gl_FragColor = vec4(1, 1, 1, 1);}`;
 function GLINIT() {
   gl = canvas.getContext("webgl");
   if (!gl) {

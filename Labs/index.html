@@ -22,11 +22,22 @@
             <option value="Nepal">Nepal Flag</option>
             <option value="Ellipse">Ellipse Mid-Point</option>
             <option value="Circle">Circle Mid-Point</option>
+            <option value="Transformation">Transform</option>
+        </select>
+        <select class="transform-control" id="transform-control" onchange="onTransform(this.value)">
+            <option>Select</option>
+            <option value="Rotation">Rotation</option>
+            <option value="Scaling">Rotate & Scale</option>
+            <option value="Shearing">Shearing</option>
+            <option value="Reflection">Reflection</option>
+            <option value="Translation">Translation</option>
         </select>
     </div>
-    <canvas class="canvas" id="canvas" height="450" width="450" style="background: black">
-    </canvas>
     <p class="resolution" id="resolution"></p>
+    <div class="canvas-container">
+        <canvas class="canvas" id="canvas" height="400" width="400" style="background: black">
+        </canvas>
+    </div>
     <div class="footer" id="footerId">
         <h3>Graphics Lab Work</h3>
         <h3>Name: Chandan Kumar Mahato (31)</h3>
@@ -47,7 +58,8 @@
                 </svg>
             </a>
         </div>
-        <script src="./index.js"></script>
+    </div>
+    <script src="./index.js"></script>
 </body>
 
 </html>
