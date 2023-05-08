@@ -15,6 +15,8 @@ let scriptList = [
   "./Lab4/scaling.js",
   "./Lab4/shearing.js",
   "./Lab4/translation.js",
+  "./Lab5/viewPort.js",
+  "./Lab5/cohenSutherland.js",
   "./title.js",
 ];
 scriptList.forEach(function (s) {
@@ -25,7 +27,7 @@ scriptList.forEach(function (s) {
 });
 
 function callAlgo(title) {
-  document.getElementById("transform-control").style.display = "none";
+  document.getElementById("transform-control-2D").style.display = "none";
   if (title === "DDA") {
     GLINIT();
     drawDDALine(100, 100, 300, 300);
@@ -51,11 +53,23 @@ function callAlgo(title) {
     drawCircleMidPoint(80, 120, 200);
     return;
   }
-  if (title === "Transformation") {
+  if (title === "2D-Transformation") {
     GLINIT();
-    document.getElementById("transform-control").style.display = "block";
+    document.getElementById("transform-control-2D").style.display = "block";
     drawAxis();
     drawTriangle();
+    return;
+  }
+  if (title === "Cohen Sutherland") {
+    GLINIT();
+    let P1 = [-0.6, -0.7, 0];
+    let P2 = [0.9, 0.4, 0];
+    let Xw_min = -0.8;
+    let Yw_min = -0.5;
+    let Xw_max = 0.8;
+    let Yw_max = 0.5;
+    cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max);
+    drawViewPort(Xw_min, Yw_min, Xw_max, Yw_max);
     return;
   }
 }
@@ -64,23 +78,23 @@ function callTransformer(transform) {
   GLINIT();
   drawAxis();
   drawTriangle();
-  if (transform === "Rotation") {
+  if (transform === "2D-Rotation") {
     rotateObject();
     return;
   }
-  if (transform === "Scaling") {
+  if (transform === "2D-Scaling") {
     scaleObject();
     return;
   }
-  if (transform === "Shearing") {
+  if (transform === "2D-Shearing") {
     shearObject();
     return;
   }
-  if (transform === "Reflection") {
+  if (transform === "2D-Reflection") {
     reflectObject();
     return;
   }
-  if (transform === "Translation") {
+  if (transform === "2D-Translation") {
     translateObject();
     return;
   }

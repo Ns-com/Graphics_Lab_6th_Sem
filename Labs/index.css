@@ -24,7 +24,7 @@ select {
   margin-left: 10px;
 }
 
-.transform-control {
+.transform-control-2D {
   display: none;
 }
 
@@ -38,7 +38,7 @@ select {
     margin: 10px 0;
   }
 
-  .transform-control {
+  .transform-control-2D {
     display: none;
     margin-top: 10px;
   }
