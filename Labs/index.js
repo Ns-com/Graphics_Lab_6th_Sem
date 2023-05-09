@@ -17,6 +17,7 @@ let scriptList = [
   "./Lab4/translation.js",
   "./Lab5/viewPort.js",
   "./Lab5/cohenSutherland.js",
+  "./Lab5/sutherlandHodgemann.js",
   "./title.js",
 ];
 scriptList.forEach(function (s) {
@@ -28,6 +29,10 @@ scriptList.forEach(function (s) {
 
 function callAlgo(title) {
   document.getElementById("transform-control-2D").style.display = "none";
+  let Xw_min = -0.8;
+  let Yw_min = -0.5;
+  let Xw_max = 0.8;
+  let Yw_max = 0.5;
   if (title === "DDA") {
     GLINIT();
     drawDDALine(100, 100, 300, 300);
@@ -61,15 +66,17 @@ function callAlgo(title) {
     return;
   }
   if (title === "Cohen Sutherland") {
-    GLINIT();
     let P1 = [-0.6, -0.7, 0];
     let P2 = [0.9, 0.4, 0];
-    let Xw_min = -0.8;
-    let Yw_min = -0.5;
-    let Xw_max = 0.8;
-    let Yw_max = 0.5;
+    GLINIT();
     cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max);
     drawViewPort(Xw_min, Yw_min, Xw_max, Yw_max);
+    return;
+  }
+  if (title === "Sutherland Hodgemann") {
+    GLINIT();
+    drawViewPort(Xw_min, Yw_min, Xw_max, Yw_max);
+    sutherLandHodgemann(Xw_min, Yw_min, Xw_max, Yw_max);
     return;
   }
 }

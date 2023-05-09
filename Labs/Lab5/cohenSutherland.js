@@ -8,24 +8,24 @@ function cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max) {
   let P2_new = [];
   let m = (y1 - y0) / (x1 - x0);
 
-  let regionCodeP1 = computeOutCode(x0, y0, Xw_min, Yw_min, Xw_max, Yw_max);
-  let regionCodeP2 = computeOutCode(x1, y1, Xw_min, Yw_min, Xw_max, Yw_max);
+  let regionCodeP1 = computeRegionCode(x0, y0, Xw_min, Yw_min, Xw_max, Yw_max);
+  let regionCodeP2 = computeRegionCode(x1, y1, Xw_min, Yw_min, Xw_max, Yw_max);
   while (true) {
     if ((regionCodeP1 | regionCodeP2) === 0) {
       vertexData.push(...P1_new, ...P2_new);
-      DrawObject(gl.LINES, 2, White, vertexData, 0, vertexData.length);
+      DrawObject(gl.LINES, 2, Green, vertexData, 0, vertexData.length);
       vertexData = [];
-      vertexData.push(...P1, ...P2);
-      DrawObject(gl.LINES, 2, Red, vertexData, 0, vertexData.length);
-      return [P1, P2];
+      vertexData.push(...P1, ...P1_new, ...P2, ...P2_new);
+      DrawObject(gl.LINES, 2, Blue, vertexData, 0, vertexData.length);
+      return;
     } else if ((regionCodeP1 & regionCodeP2) !== 0) {
       vertexData.push(...P1_new, ...P2_new);
-      DrawObject(gl.LINES, 2, Red, vertexData, 0, vertexData.length);
+      DrawObject(gl.LINES, 2, Gray, vertexData, 0, vertexData.length);
       return null;
     } else {
       let x, y;
       let regionCode = regionCodeP1 !== 0 ? regionCodeP1 : regionCodeP2;
-
+      console.log(regionCode);
       if ((regionCode & 1) !== 0) {
         x = Xw_min;
         y = y1 + m * (x - x1);
@@ -41,23 +41,17 @@ function cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max) {
       }
 
       if (regionCode === regionCodeP1) {
-        x0 = x;
-        y0 = y;
-        regionCodeP1 = computeOutCode(x0, y0, Xw_min, Yw_min, Xw_max, Yw_max);
-        P1_new[0] = x0;
-        P1_new[1] = y0;
+        regionCodeP1 = computeRegionCode(x, y, Xw_min, Yw_min, Xw_max, Yw_max);
+        P1_new = [x, y, 0];
       } else {
-        x1 = x;
-        y1 = y;
-        regionCodeP2 = computeOutCode(x1, y1, Xw_min, Yw_min, Xw_max, Yw_max);
-        P2_new[0] = x1;
-        P2_new[1] = y1;
+        regionCodeP2 = computeRegionCode(x, y, Xw_min, Yw_min, Xw_max, Yw_max);
+        P2_new = [x, y, 0];
       }
     }
   }
 }
 
-function computeOutCode(x, y, Xw_min, Yw_min, Xw_max, Yw_max) {
+function computeRegionCode(x, y, Xw_min, Yw_min, Xw_max, Yw_max) {
   let code = 0;
   if (x < Xw_min) {
     code |= 1;

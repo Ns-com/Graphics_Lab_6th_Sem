@@ -14,5 +14,5 @@ function drawViewPort(Xw_min, Yw_min, Xw_max, Yw_max) {
     ...bottomRight,
     ...bottomLeft
   );
-  DrawObject(gl.LINES, 2, Green, vertexData, 0, vertexData.length);
+  DrawObject(gl.LINES, 2, White, vertexData, 0, vertexData.length);
 }
