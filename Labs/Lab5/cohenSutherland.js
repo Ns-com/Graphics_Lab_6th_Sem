@@ -1,139 +1,73 @@
 function cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max) {
-  let p1Code = computeRegionCode(P1, Xw_min, Yw_min, Xw_max, Yw_max);
-  let p2Code = computeRegionCode(P2, Xw_min, Yw_min, Xw_max, Yw_max);
-  let p10, p20, p1p20, m, P1_new, P2_new;
-  m = (P2[1] - P1[1]) / (P2[0] - P1[0]);
-  P1_new = [...P1];
-  P2_new = [...P2];
-  for (let i = 0; i < 4; i++) {
-    p10 = p1Code[0] || p1Code[1] || p1Code[2] || p1Code[3];
-    p20 = p2Code[0] || p2Code[1] || p2Code[2] || p2Code[3];
-    p1p20 =
-      (p1Code[0] && p2Code[0]) ||
-      (p1Code[1] && p2Code[1]) ||
-      (p1Code[2] && p2Code[2]) ||
-      (p1Code[3] && p2Code[3]);
-    if (!p10 && !p20) {
-      let vertexData = [...P1_new, ...P2_new];
+  let x0 = P1[0];
+  let y0 = P1[1];
+  let x1 = P2[0];
+  let y1 = P2[1];
+  let vertexData = [];
+  let P1_new = [];
+  let P2_new = [];
+  let m = (y1 - y0) / (x1 - x0);
+
+  let regionCodeP1 = computeOutCode(x0, y0, Xw_min, Yw_min, Xw_max, Yw_max);
+  let regionCodeP2 = computeOutCode(x1, y1, Xw_min, Yw_min, Xw_max, Yw_max);
+  while (true) {
+    if ((regionCodeP1 | regionCodeP2) === 0) {
+      vertexData.push(...P1_new, ...P2_new);
       DrawObject(gl.LINES, 2, White, vertexData, 0, vertexData.length);
+      vertexData = [];
+      vertexData.push(...P1, ...P2);
+      DrawObject(gl.LINES, 2, Red, vertexData, 0, vertexData.length);
+      return [P1, P2];
+    } else if ((regionCodeP1 & regionCodeP2) !== 0) {
+      vertexData.push(...P1_new, ...P2_new);
+      DrawObject(gl.LINES, 2, Red, vertexData, 0, vertexData.length);
+      return null;
     } else {
-      if (!p1p20) {
-        if (!p10) {
-          let x1 = P2_new[0];
-          let y1 = P2_new[1];
-          P2_new = [];
-          if (p2Code[0] === 1) {
-            P2_new.push(x1 + (Yw_max - y1) / m);
-            P2_new.push(Yw_max);
-            p2Code = computeRegionCode(P2_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-          if (p2Code[1] === 1) {
-            P2_new.push(x1 + (Yw_min - y1) / m);
-            P2_new.push(Yw_min);
-            p2Code = computeRegionCode(P2_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-          if (p2Code[2] === 1) {
-            P2_new.push(Xw_max);
-            P2_new.push(y1 + m * (Xw_max - x1));
-            p2Code = computeRegionCode(P2_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-          if (p2Code[3] === 1) {
-            P2_new.push(Xw_min);
-            P2_new.push(y1 + m * (Xw_min - x1));
-            p2Code = computeRegionCode(P2_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-        } else if (!p20) {
-          let x1 = P1_new[0];
-          let y1 = P1_new[1];
-          P1_new = [];
-          if (p2Code[0] === 1) {
-            P1_new.push(x1 + (Yw_max - y1) / m);
-            P1_new.push(Yw_max);
-            p1Code = computeRegionCode(P1_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-          if (p1Code[1] === 1) {
-            P1_new.push(x1 + (Yw_min - y1) / m);
-            P1_new.push(Yw_min);
-            p1Code = computeRegionCode(P1_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-          if (p1Code[2] === 1) {
-            P1_new.push(Xw_max);
-            P1_new.push(y1 + m * (Xw_max - x1));
-            p1Code = computeRegionCode(P1_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-          if (p1Code[3] === 1) {
-            P1_new.push(Xw_min);
-            P1_new.push(y1 + m * (Xw_min - x1));
-            p1Code = computeRegionCode(P1_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-        } else {
-          let x1 = P1_new[0];
-          let y1 = P1_new[1];
-          P1_new = [];
-          if (p2Code[0] === 1) {
-            P1_new.push(x1 + (Yw_max - y1) / m);
-            P1_new.push(Yw_max);
-            p1Code = computeRegionCode(P1_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-          if (p1Code[1] === 1) {
-            P1_new.push(x1 + (Yw_min - y1) / m);
-            P1_new.push(Yw_min);
-            p1Code = computeRegionCode(P1_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-          if (p1Code[2] === 1) {
-            P1_new.push(Xw_max);
-            P1_new.push(y1 + m * (Xw_max - x1));
-            p1Code = computeRegionCode(P1_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-          if (p1Code[3] === 1) {
-            P1_new.push(Xw_min);
-            P1_new.push(y1 + m * (Xw_min - x1));
-            p1Code = computeRegionCode(P1_new, Xw_min, Yw_min, Xw_max, Yw_max);
-          }
-        }
+      let x, y;
+      let regionCode = regionCodeP1 !== 0 ? regionCodeP1 : regionCodeP2;
+
+      if ((regionCode & 1) !== 0) {
+        x = Xw_min;
+        y = y1 + m * (x - x1);
+      } else if ((regionCode & 2) !== 0) {
+        x = Xw_max;
+        y = y1 + m * (x - x1);
+      } else if ((regionCode & 4) !== 0) {
+        y = Yw_min;
+        x = x1 + (y - y1) / m;
+      } else if ((regionCode & 8) !== 0) {
+        y = Yw_max;
+        x = x1 + (y - y1) / m;
+      }
+
+      if (regionCode === regionCodeP1) {
+        x0 = x;
+        y0 = y;
+        regionCodeP1 = computeOutCode(x0, y0, Xw_min, Yw_min, Xw_max, Yw_max);
+        P1_new[0] = x0;
+        P1_new[1] = y0;
       } else {
-        console.log("hello");
-        return;
+        x1 = x;
+        y1 = y;
+        regionCodeP2 = computeOutCode(x1, y1, Xw_min, Yw_min, Xw_max, Yw_max);
+        P2_new[0] = x1;
+        P2_new[1] = y1;
       }
     }
   }
 }
 
-function computeRegionCode(P1, Xw_min, Yw_min, Xw_max, Yw_max) {
-  let [T, B, R, L] = [0, 0, 0, 0];
-  const [x, y] = [P1[0], P1[1]];
-  const [isLeft, isRight, isBottom, isTop] = [
-    x < Xw_min,
-    x > Xw_max,
-    y < Yw_min,
-    y > Yw_max,
-  ];
-  switch (true) {
-    case isLeft && isTop:
-      [T, L] = [1, 1];
-      break;
-    case isLeft && !isTop && !isBottom:
-      L = 1;
-      break;
-    case isLeft && isBottom:
-      [B, L] = [1, 1];
-      break;
-    case !isLeft && !isRight && isTop:
-      T = 1;
-      break;
-    case isRight && isTop:
-      [T, R] = [1, 1];
-      break;
-    case isRight && !isTop && !isBottom:
-      R = 1;
-      break;
-    case isRight && isBottom:
-      [B, R] = [1, 1];
-      break;
-    case !isLeft && !isRight && isBottom:
-      B = 1;
-      break;
+function computeOutCode(x, y, Xw_min, Yw_min, Xw_max, Yw_max) {
+  let code = 0;
+  if (x < Xw_min) {
+    code |= 1;
+  } else if (x > Xw_max) {
+    code |= 2;
   }
-
-  return [T, B, R, L];
+  if (y < Yw_min) {
+    code |= 4;
+  } else if (y > Yw_max) {
+    code |= 8;
+  }
+  return code;
 }
