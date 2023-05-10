@@ -5,22 +5,15 @@ function sutherLandHodgemann(Xw_min, Yw_min, Xw_max, Yw_max) {
   let P3 = [0.4, 0.7, 0];
   let P4 = [-0.2, 0.6, 0];
   let P5 = [-0.4, 0.2, 0];
-  vertexData.push(
-    ...P1,
-    ...P2,
-    ...P2,
-    ...P3,
-    ...P3,
-    ...P4,
-    ...P4,
-    ...P5,
-    ...P5
-  );
-  // DrawObject(gl.LINES, 2, Red, vertexData, 0, vertexData.length);
-
+  vertexData.push(...P1,...P2,...P2,...P3,...P3,...P4,...P4,...P5,...P5);
   cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max);
+  GLINIT();
   cohenSutherland(P2, P3, Xw_min, Yw_min, Xw_max, Yw_max);
+  GLINIT();
   cohenSutherland(P3, P4, Xw_min, Yw_min, Xw_max, Yw_max);
+  GLINIT();
   cohenSutherland(P4, P5, Xw_min, Yw_min, Xw_max, Yw_max);
+  GLINIT();
   cohenSutherland(P5, P1, Xw_min, Yw_min, Xw_max, Yw_max);
+  GLINIT();
 }

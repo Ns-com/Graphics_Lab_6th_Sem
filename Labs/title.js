@@ -3,6 +3,10 @@ function onChangeLab(title) {
   callAlgo(title);
 }
 
-function onTransform(transform) {
-  callTransformer(transform);
+function onTransform2D(transform) {
+  call2DTransformer(transform);
+}
+
+function onTransform3D(transform) {
+  call3DTransformer(transform);
 }

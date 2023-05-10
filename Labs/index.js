@@ -18,6 +18,11 @@ let scriptList = [
   "./Lab5/viewPort.js",
   "./Lab5/cohenSutherland.js",
   "./Lab5/sutherlandHodgemann.js",
+  "./Lab6/draw3D.js",
+  "./Lab6/3DObject.js",
+  "./Lab6/translate.js",
+  "./Lab6/scale.js",
+  "./Lab6/rotate.js",
   "./title.js",
 ];
 scriptList.forEach(function (s) {
@@ -29,6 +34,7 @@ scriptList.forEach(function (s) {
 
 function callAlgo(title) {
   document.getElementById("transform-control-2D").style.display = "none";
+  document.getElementById("transform-control-3D").style.display = "none";
   let Xw_min = -0.8;
   let Yw_min = -0.5;
   let Xw_max = 0.8;
@@ -69,28 +75,41 @@ function callAlgo(title) {
     let P1 = [-0.6, -0.7, 0];
     let P2 = [0.9, 0.4, 0];
     GLINIT();
-    cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max);
     drawViewPort(Xw_min, Yw_min, Xw_max, Yw_max);
+    GLINIT();
+    cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max);
     return;
   }
   if (title === "Sutherland Hodgemann") {
     GLINIT();
-    sutherLandHodgemann(Xw_min, Yw_min, Xw_max, Yw_max);
     drawViewPort(Xw_min, Yw_min, Xw_max, Yw_max);
+    GLINIT();
+    sutherLandHodgemann(Xw_min, Yw_min, Xw_max, Yw_max);
+    return;
+  }
+  if (title === "3D-Transformation") {
+    let O = [-0.5, -0.5, 0];
+    let [H, W, L] = [0.3, 0.3, 0.3];
+    GLINIT();
+    document.getElementById("transform-control-3D").style.display = "block";
+    draw3DObject(O, H, W, L);
+    GLINIT();
+    drawAxis();
     return;
   }
 }
 
-function callTransformer(transform) {
+function call2DTransformer(transform) {
   GLINIT();
   drawAxis();
   drawTriangle();
+  GLINIT();
   if (transform === "2D-Rotation") {
-    rotateObject();
+    drawRotatedObject(Math.PI / 2);
     return;
   }
   if (transform === "2D-Scaling") {
-    scaleObject();
+    drawScaledObject(1.5, 1.5);
     return;
   }
   if (transform === "2D-Shearing") {
@@ -102,7 +121,36 @@ function callTransformer(transform) {
     return;
   }
   if (transform === "2D-Translation") {
-    translateObject();
+    drawTranslatedObject(-0.6, -0.6);
+    return;
+  }
+}
+
+function call3DTransformer(transform) {
+  let O = [-0.5, -0.5, 0];
+  let [H, W, L] = [0.3, 0.3, 0.3];
+  GLINIT();
+  document.getElementById("transform-control-3D").style.display = "block";
+  draw3DObject(O, H, W, L);
+  GLINIT();
+  drawAxis();
+  if (transform === "3D-Translation") {
+    translate3DObject(0.5, 0.5);
+    GLINIT();
+    drawAxis();
+    return;
+  }
+  if (transform === "3D-Rotation") {
+    rotate3DObject((4 * Math.PI) / 5);
+    GLINIT();
+    drawAxis();
+    return;
+  }
+  if (transform === "3D-Scaling") {
+    translate3DObject(0.5, 0.5);
+    scale3DObject(1.5, 1.5);
+    GLINIT();
+    drawAxis();
     return;
   }
 }

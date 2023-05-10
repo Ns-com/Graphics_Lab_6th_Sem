@@ -1,11 +1,13 @@
-function matrixMultiplication(Transformer, coordinates) {
+function matrixMultiplication(Transformer, coordinates, numElements) {
   let result = [];
-  for (let i = 0; i < 3; i++) {
-    let sum = 0;
+  for (let i = 0; i < coordinates.length; i += 3) {
     for (let j = 0; j < 3; j++) {
-      sum += Transformer[i * 3 + j] * coordinates[j];
+      let sum = 0;
+      for (let k = 0; k < numElements; k++) {
+        sum += Transformer[j * 3 + k] * coordinates[i + k];
+      }
+      result.push(sum);
     }
-    result.push(sum);
   }
   return result;
 }

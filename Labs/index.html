@@ -25,14 +25,21 @@
             <option value="2D-Transformation">2D-Transform</option>
             <option value="Cohen Sutherland">Cohen Sutherland</option>
             <option value="Sutherland Hodgemann">Sutherland Hodgemann</option>
+            <option value="3D-Transformation">3D-Transform</option>
         </select>
-        <select class="transform-control-2D" id="transform-control-2D" onchange="onTransform(this.value)">
+        <select class="transform-control-2D" id="transform-control-2D" onchange="onTransform2D(this.value)">
             <option>Select</option>
             <option value="2D-Rotation">Rotation</option>
-            <option value="2D-Scaling">Rotate & Scale</option>
+            <option value="2D-Scaling">Scale</option>
             <option value="2D-Shearing">Shearing</option>
             <option value="2D-Reflection">Reflection</option>
             <option value="2D-Translation">Translation</option>
+        </select>
+        <select class="transform-control-3D" id="transform-control-3D" onchange="onTransform3D(this.value)">
+            <option>Select</option>
+            <option value="3D-Rotation">Rotation</option>
+            <option value="3D-Scaling">Scale</option>
+            <option value="3D-Translation">Translation</option>
         </select>
     </div>
     <p class="resolution" id="resolution"></p>

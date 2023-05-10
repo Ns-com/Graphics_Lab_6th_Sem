@@ -4,5 +4,5 @@ let vertexC = [0.1, 0.1, 1];
 function drawTriangle() {
   let vertexData = [];
   vertexData.push(...vertexA, ...vertexB, ...vertexC);
-  DrawObject(gl.TRIANGLES, 3, Red, vertexData, 0, vertexData.length);
+  DrawObject(gl.TRIANGLES, 3, Red, vertexData, 0, vertexData.length, 3);
 }
