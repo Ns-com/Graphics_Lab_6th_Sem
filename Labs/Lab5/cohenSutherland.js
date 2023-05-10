@@ -4,8 +4,8 @@ function cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max) {
   let x1 = P2[0];
   let y1 = P2[1];
   let vertexData = [];
-  let P1_new = [];
-  let P2_new = [];
+  let P1_new = [...P1];
+  let P2_new = [...P2];
   let m = (y1 - y0) / (x1 - x0);
 
   let regionCodeP1 = computeRegionCode(x0, y0, Xw_min, Yw_min, Xw_max, Yw_max);
@@ -14,18 +14,18 @@ function cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max) {
     if ((regionCodeP1 | regionCodeP2) === 0) {
       vertexData.push(...P1_new, ...P2_new);
       DrawObject(gl.LINES, 2, Green, vertexData, 0, vertexData.length);
+      console.log(vertexData);
       vertexData = [];
       vertexData.push(...P1, ...P1_new, ...P2, ...P2_new);
-      DrawObject(gl.LINES, 2, Blue, vertexData, 0, vertexData.length);
+      DrawObject(gl.LINES, 2, Red, vertexData, 0, vertexData.length);
       return;
     } else if ((regionCodeP1 & regionCodeP2) !== 0) {
-      vertexData.push(...P1_new, ...P2_new);
-      DrawObject(gl.LINES, 2, Gray, vertexData, 0, vertexData.length);
+      vertexData.push(...P1, ...P2);
+      DrawObject(gl.LINES, 2, Red, vertexData, 0, vertexData.length);
       return null;
     } else {
       let x, y;
       let regionCode = regionCodeP1 !== 0 ? regionCodeP1 : regionCodeP2;
-      console.log(regionCode);
       if ((regionCode & 1) !== 0) {
         x = Xw_min;
         y = y1 + m * (x - x1);
@@ -42,9 +42,11 @@ function cohenSutherland(P1, P2, Xw_min, Yw_min, Xw_max, Yw_max) {
 
       if (regionCode === regionCodeP1) {
         regionCodeP1 = computeRegionCode(x, y, Xw_min, Yw_min, Xw_max, Yw_max);
+        P1_new = [];
         P1_new = [x, y, 0];
       } else {
         regionCodeP2 = computeRegionCode(x, y, Xw_min, Yw_min, Xw_max, Yw_max);
+        P2_new = [];
         P2_new = [x, y, 0];
       }
     }

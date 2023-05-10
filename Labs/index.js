@@ -75,8 +75,8 @@ function callAlgo(title) {
   }
   if (title === "Sutherland Hodgemann") {
     GLINIT();
-    drawViewPort(Xw_min, Yw_min, Xw_max, Yw_max);
     sutherLandHodgemann(Xw_min, Yw_min, Xw_max, Yw_max);
+    drawViewPort(Xw_min, Yw_min, Xw_max, Yw_max);
     return;
   }
 }
